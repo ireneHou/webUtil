@@ -14,7 +14,7 @@ For every i and j where 0 <= i < j < arr.length, we consider the fraction arr[i]
 
 Return the kth smallest fraction considered. Return your answer as an array of integers of size 2, where answer[0] == arr[i] and answer[1] == arr[j].
 
-Example 1:
+Example:
 
 ```
 Input: arr = [1,2,3,5], k = 3
