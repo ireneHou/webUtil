@@ -1,11 +1,3 @@
-# [title](https://url.com)
-
-## 题目
-
-## 题目大意
-
-## 解题思路
-
 # LeetCode in JavaScript
 
 ## 个人数据
@@ -167,7 +159,6 @@
 </table>
 
 ## 分类
-
 
 <table>
   <thead>
