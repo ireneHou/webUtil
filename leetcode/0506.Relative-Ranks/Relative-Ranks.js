@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * @param {number[]} score
  * @return {string[]}
@@ -13,4 +14,21 @@ var findRelativeRanks = function (score) {
       result.push(rankArr[index] || String(index + 1))
   }
   return result
+=======
+/**
+ * @param {number[]} score
+ * @return {string[]}
+ */
+var findRelativeRanks = function (score) {
+  let rankArr = ['Gold Medal', 'Silver Medal', 'Bronze Medal']
+  let result = []
+  let scoreSort = JSON.parse(JSON.stringify(score))
+  scoreSort.sort((a, b) => b - a)
+  const len = score.length
+  for (let i = 0; i < len; i++) {
+      const index = scoreSort.findIndex(r => score[i] === r)
+      result.push(rankArr[index] || String(index + 1))
+  }
+  return result
+>>>>>>> 38b7e0ddd1b3b75556d0d229a328136e5c64d472
 };

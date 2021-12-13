@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * [字符串解法]
  * @param {number} x
@@ -41,4 +42,49 @@ var isPalindrome = function (x) {
   // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，revertedNumber = 123，
   // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。
   return result === x || parseInt(result / 10) === x
+=======
+/**
+ * [字符串解法]
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function (x) {
+  // 特殊情况：
+  // 如上所述，当 x < 0 时，x 不是回文数。
+  // 同样地，如果数字的最后一位是 0，为了使该数字为回文，则其第一位数字也应该是 0，只有 0 满足这一属性
+  if (x < 0 || (x % 10 == 0 && x > 0)) {
+    return false;
+  }
+
+  let result = true
+  let str = String(x)
+  const len = str.length
+  for (let i = 0; i < len; i++) {
+    if (i > len / 2) break
+    if (str[i] !== str[len - (i + 1)]) {
+      result = false
+      break;
+    }
+  }
+  return result
+};
+
+/**
+ * [数字转换-内存消耗少]
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function (x) {
+  if (x < 0 || x > 0 && x % 10 === 0) return false
+
+  let result = 0
+  while (result < x) {
+    result = result * 10 + x % 10
+    x = parseInt(x / 10)
+  }
+  // 当数字长度为奇数时，我们可以通过 revertedNumber/10 去除处于中位的数字。
+  // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，revertedNumber = 123，
+  // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。
+  return result === x || parseInt(result / 10) === x
+>>>>>>> 38b7e0ddd1b3b75556d0d229a328136e5c64d472
 };
