@@ -3,6 +3,6 @@
  * @param {number[]} b
  * @return {number}
  */
-var superPow = function(a, b) {
+var superPow = function (a, b) {
 
 };
