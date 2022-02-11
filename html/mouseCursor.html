@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>undo鼠标光标位置</title>
+</head>
+
+<body>
+  <ul>
+      <li>1、如何获取or设置输入框光标的位置？</li>
+      <li>2、如何计算期望的位置？</li>
+  </ul>
+  <!-- 
+    https://blog.csdn.net/weixin_43550660/article/details/103220424
+    获取/设置光标的位置
+    浏览器给我们提供了输入框的选中控制 API：
+    
+    setSelectionRange()：设置输入框选中区域，只有起始和结束在同一个位置，就可以设置光标位置。
+    selectionStart：选取区域的起始位置。
+    selectionEnd：选取区域的结束位置。 -->
+  <div class="a">
+    MAC地址：<input name="macAddress" value="asdfghjkl" id="macAddress" oninput="handleMacFormat(this.value)" />
+  </div>
+  <div class="s">
+    手机号码：<input name="cellphone " value="1562166" id="cellphone" oninput="handleCellphoneFormat(this.value)" />
+  </div>
+  <div class="s">
+    金额：<input name="amount " value="100000" id="amount" />
+  </div>
+  <script>
+    function handleMacFormat(val) {
+      var macDom = document.getElementById('macAddress')
+      macDom.value = formatMAC(val)
+    }
+
+    function handleCellphoneFormat(val) {
+      var cellphoneDom = document.getElementById('cellphone')
+      cellphoneDom.value = formatCellphone(val)
+    }
+
+    function handleAmountFormat(val) {
+      var amountDom = document.getElementById('amount')
+      amountDom.value = formatAmount(val)
+    }
+
+    // MAC 格式化 22
+    function formatMAC(val) {
+      // [] 标记一个中括号表达式的开始。要匹配 [，请使用 \[。
+      // ^ 匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 \^。
+      val = val.replace(/[^0-9a-zA-Z]/g, '').substring(0, 12)
+      // () 标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 \( 和 \)。
+      // . 匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 \. 。
+      // {} 标记限定符表达式的开始。要匹配 {，请使用 \{。
+      val = val.replace(/(.{2})/g, '$1 ')
+      return val
+    }
+
+    // cellphone 格式化 344
+    function formatCellphone(val) {
+      var value = val.replace(/\D/g, '').substring(0, 11);
+      var valueLen = value.length;
+      if (valueLen > 3 && valueLen < 8) {
+        value = `${value.substr(0, 3)} ${value.substr(3)}`;
+      } else if (valueLen >= 8) {
+        value = `${value.substr(0, 3)} ${value.substr(3, 4)} ${value.substr(7)}`;
+      }
+      return value;
+    }
+
+    // amount 格式化
+    function formatAmount(s) {
+      s = s.replace(/^(\d*)$/, "$1.");
+      s = (s + "00").replace(/(\d*\.\d\d)\d*/, "$1");
+      s = s.replace(".", ",");
+      var re = /(\d)(\d{3},)/;
+      while (re.test(s))
+        s = s.replace(re, "$1,$2");
+      s = s.replace(/,(\d\d)$/, ".$1");
+      return s.replace(/^\./, "0.")
+    }
+  </script>
+</body>
+
+</html>
